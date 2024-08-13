@@ -1,6 +1,5 @@
 package ru.evgenii.artemis.controller;
 
-import ch.qos.logback.classic.pattern.MessageConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
