@@ -1,0 +1,12 @@
+services:
+  artemis:
+    image: apache/activemq-artemis:latest
+    container_name: artemis
+    environment:
+      - ARTEMIS_USERNAME=artemis
+      - ARTEMIS_PASSWORD=artemis
+    ports:
+      - "61616:61616"   # AMQP порт
+      - "8161:8161"     # Веб-консоль
+    volumes:
+      - ./data:/var/lib/artemis/data
