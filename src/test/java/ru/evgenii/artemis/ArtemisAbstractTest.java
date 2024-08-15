@@ -24,7 +24,7 @@ public abstract class ArtemisAbstractTest {
     static void artemisProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.artemis.broker-url",
                 () -> "tcp://%s:%d".formatted(artemis.getHost(),
-                        artemis.getMappedPort(61616)));
+                        artemis.getFirstMappedPort()));
     }
 
     @AfterAll
