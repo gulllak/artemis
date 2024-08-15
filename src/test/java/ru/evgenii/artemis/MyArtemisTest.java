@@ -9,6 +9,7 @@ import org.springframework.jms.core.JmsTemplate;
 import ru.evgenii.artemis.model.Person;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MyArtemisTest extends ArtemisAbstractTest {
 
@@ -19,12 +20,15 @@ class MyArtemisTest extends ArtemisAbstractTest {
 
     @Test
     void sendMessage() throws JMSException {
+
         Person person = new Person("Boris", "Britva");
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><person><firstName>Boris</firstName><lastName>Britva</lastName></person>";
+
         jmsTemplate.convertAndSend(TEST_QUEUE, person);
         Message message = jmsTemplate.receive(TEST_QUEUE);
-        TextMessage textMessage = (TextMessage) message;
-        assert textMessage != null;
-        assertThat(textMessage.getText())
-                .isEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><person><firstName>Boris</firstName><lastName>Britva</lastName></person>");
+
+        assertNotNull(message);
+        assertThat(((TextMessage) message).getText())
+                .isEqualTo(expected);
     }
 }
